@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Brand Theme Color - Void Black #0a0f0e -->
+    <meta name="theme-color" content="#0a0f0e">
+    <meta name="msapplication-TileColor" content="#0a0f0e">
+    
+    <!-- SEO Meta Tags -->
+    <title>Global Signal | Separating Signal from Noise</title>
+    <meta name="description" content="Global Signal transforms voluminous streams of global data into actionable predictive signals using mathematically rigorous, academically sound models. No black boxes. Pure signal.">
+    <meta name="keywords" content="financial analysis, trading signals, quantitative analysis, mathematical models, market prediction, forex, cryptocurrency, equities, reproducible research">
+    <meta name="author" content="Global Signal">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Global Signal | Separating Signal from Noise">
+    <meta property="og:description" content="Mathematically rigorous financial signals. No black boxes. Pure academic precision.">
+    <meta property="og:url" content="https://globalsignal.com">
+    <meta property="og:image" content="/assets/images/social-secondary-logo.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Global Signal | Separating Signal from Noise">
+    <meta name="twitter:description" content="Mathematically rigorous financial signals. No black boxes. Pure academic precision.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/watermark-1.png">
+    <link rel="apple-touch-icon" href="/assets/images/social-watermark.png">
+    
+    <!-- Fonts - Preload for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Side Navigation -->
+    <nav class="side-nav" id="sideNav" role="navigation" aria-label="Section navigation">
+        <div class="side-nav-track">
+            <a href="#home" class="side-nav-dot active" data-section="home" aria-label="Home section">
+                <span class="dot"></span>
+                <span class="label">Home</span>
+            </a>
+            <a href="#about" class="side-nav-dot" data-section="about" aria-label="About section">
+                <span class="dot"></span>
+                <span class="label">About</span>
+            </a>
+            <a href="#signals" class="side-nav-dot" data-section="signals" aria-label="Signals section">
+                <span class="dot"></span>
+                <span class="label">Signals</span>
+            </a>
+            <a href="#products" class="side-nav-dot" data-section="products" aria-label="Products section">
+                <span class="dot"></span>
+                <span class="label">Products</span>
+            </a>
+            <a href="#community" class="side-nav-dot" data-section="community" aria-label="Community section">
+                <span class="dot"></span>
+                <span class="label">Community</span>
+            </a>
+        </div>
+        <div class="scroll-hint">
+            <span class="scroll-hint-text">Scroll</span>
+            <span class="scroll-hint-line"></span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-background">
+                <canvas id="signalCanvas" aria-hidden="true"></canvas>
+            </div>
+            
+            <div class="hero-content">
+                <!-- Centered Logo -->
+                <div class="hero-logo">
+                    <img src="/assets/images/4x Primary Logo4.png" alt="Global Signal Logo" class="hero-logo-img">
+                </div>
+                
+                <div class="hero-header">
+                    <p class="hero-tagline">sound, reliable, and reproducable</p>
+                    
+                    <h1 class="hero-title">
+                        Separating <span class="accent">Signal</span> from Noise
+                        <span class="cipher" id="cipherText">mathematically rigorous financial analysis</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        We transform voluminous streams of global data into actionable signals that provide real utility using mathematically sound models. No black-box ML models, no guesswork  
+                        just rigorous, reproducible quantitative analysis.
+                    </p>
+                </div>
+                
+                <div class="hero-cta">
+                    <a href="#signals" class="btn btn-primary">Explore Signals</a>
+                    <a href="#community" class="btn btn-secondary">Join our Discord Community!</a>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator" aria-hidden="true">
+                <span></span>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">ABOUT</span>
+                    <h2 class="section-title">Mathematical Rigor, Not Black Boxes</h2>
+                    <p class="section-description">
+                        We believe in transparency. Every signal we produce can be verified, 
+                        reproduced, and understood.
+                    </p>
+                </div>
+                
+                <div class="about-grid">
+                    <div class="about-content">
+                        <div class="about-block">
+                            <h3>Our Mission</h3>
+                            <p>
+                                Global Signal exists to democratize access to high-quality financial analysis. 
+                                We ingest vast streams of data from global sources and transform them 
+                                into actionable predictive signals using robust, academically rigorous 
+                                mathematical models.
+                            </p>
+                            <p>
+                                This empowers traders, investors, and institutions to anticipate market 
+                                movements, mitigate risks, and seize opportunities with greater precision 
+                                and speed than otherwise possible.
+                            </p>
+                        </div>
+                        
+                        <div class="about-block">
+                            <h3>Our Approach</h3>
+                            <p>
+                                We aggregate and process data feeds from diverse global sources; news, social 
+                                media, economic indicators, satellite imagery, and alternative datasets. 
+                                This is done in a mathematically sound fashion, deliberately avoiding 
+                                unknowable "black-box" machine learning models.
+                            </p>
+                            <p>
+                                Raw information is distilled into high-fidelity signals that forecast 
+                                trends, volatility, and asset performance across equities, commodities, 
+                                forex, and cryptocurrencies.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <h4>Academically Rigorous</h4>
+                            <p>All models based on established mathematical and statistical principles. Fully documented and peer-reviewable.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                                </svg>
+                            </div>
+                            <h4>Diverse Data Sources</h4>
+                            <p>News, social media, economic indicators, satellite imagery, and alternative datasets processed in real-time.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                </svg>
+                            </div>
+                            <h4>Open & Reproducible</h4>
+                            <p>No hidden algorithms. Every signal derivation is transparent and can be independently verified.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <h4>AI-Ready Features</h4>
+                            <p>Ideal input variables for training advanced AI models, charting, or performing quantitative analysis.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transparency-note">
+                    <div class="note-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <p>
+                        <strong>Our Commitment:</strong> We are in the business of separating signal from 
+                        noise—not by guessing, surface-fitting, or machine learning, but by applying known 
+                        and understood mathematical and statistical concepts in an academic fashion.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signals Showcase Section -->
+        <section id="signals" class="signals-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">SIGNALS</span>
+                    <h2 class="section-title">Signal Showcase</h2>
+                    <p class="section-description">
+                        Explore our mathematically derived signals. Each visualization demonstrates 
+                        the power of rigorous quantitative analysis.
+                    </p>
+                </div>
+                
+                <div class="signals-info">
+                    <p class="signals-note">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Interactive demo signals. Connect to live data for real-time analysis.
+                    </p>
+                </div>
+                
+                <div class="signal-types">
+                    <button class="signal-type-btn active" data-signal="ema" aria-pressed="true">
+                        <span class="signal-name">EMA</span>
+                        <span class="signal-desc">Exponential Moving Average</span>
+                    </button>
+                    <button class="signal-type-btn" data-signal="volatility" aria-pressed="false">
+                        <span class="signal-name">Volatility</span>
+                        <span class="signal-desc">Historical Volatility</span>
+                    </button>
+                    <button class="signal-type-btn" data-signal="momentum" aria-pressed="false">
+                        <span class="signal-name">Momentum</span>
+                        <span class="signal-desc">Rate of Change</span>
+                    </button>
+                    <button class="signal-type-btn" data-signal="rsi" aria-pressed="false">
+                        <span class="signal-name">RSI</span>
+                        <span class="signal-desc">Relative Strength Index</span>
+                    </button>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title" id="chartTitle">Exponential Moving Average (EMA)</h3>
+                        <div class="chart-controls">
+                            <button class="chart-control" id="chartRefresh" aria-label="Refresh chart">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="signalChart" aria-label="Signal chart visualization" role="img"></canvas>
+                    </div>
+                    <div class="chart-formula" id="chartFormula">
+                        <code>EMA<sub>t</sub> = α × Price<sub>t</sub> + (1 - α) × EMA<sub>t-1</sub></code>
+                        <span class="formula-note">where α = 2 / (period + 1)</span>
+                    </div>
+                </div>
+                
+                <div class="signals-grid">
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge">Core Signal</span>
+                            <h4>Exponential Moving Average</h4>
+                        </div>
+                        <p>
+                            The EMA gives more weight to recent prices, making it more responsive 
+                            to new information while still smoothing out market noise.
+                        </p>
+                        <div class="signal-params">
+                            <span><strong>Period:</strong> 20</span>
+                            <span><strong>Alpha:</strong> 0.095</span>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge">Risk Metric</span>
+                            <h4>Historical Volatility</h4>
+                        </div>
+                        <p>
+                            Standard deviation of logarithmic returns, annualized by √252. 
+                            Essential for risk management and position sizing.
+                        </p>
+                        <div class="signal-params">
+                            <span><strong>Period:</strong> 20</span>
+                            <span><strong>Annualized:</strong> Yes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge">Trend Signal</span>
+                            <h4>Momentum (ROC)</h4>
+                        </div>
+                        <p>
+                            Rate of Change measures percentage change over a specified period. 
+                            Positive = upward momentum; negative = downward.
+                        </p>
+                        <div class="signal-params">
+                            <span><strong>Period:</strong> 14</span>
+                            <span><strong>Output:</strong> Percentage</span>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <span class="signal-badge">Oscillator</span>
+                            <h4>Relative Strength Index</h4>
+                        </div>
+                        <p>
+                            RSI measures speed and magnitude of recent price changes. 
+                            Range 0-100, traditional thresholds at 30 (oversold) and 70 (overbought).
+                        </p>
+                        <div class="signal-params">
+                            <span><strong>Period:</strong> 14</span>
+                            <span><strong>Range:</strong> 0-100</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">PRODUCTS</span>
+                    <h2 class="section-title">TradingView Indicators</h2>
+                    <p class="section-description">
+                        Access Global Signal's premium indicators directly in TradingView. 
+                        Mathematically rigorous signals integrated into your workflow.
+                    </p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Basic</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">3</span>
+                                <span class="period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Core signal indicators
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                EMA & Volatility signals
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                TradingView integration
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Documentation access
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Community Discord access
+                            </li>
+                        </ul>
+                        <a href="https://discord.gg/fbPKtB9t7A" class="btn btn-primary pricing-cta" target="_blank" rel="noopener noreferrer">
+                            Get Started
+                        </a>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Coming Soon</div>
+                        <div class="pricing-header">
+                            <h3>Pro</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">9</span>
+                                <span class="period">/month</span>
+                            </div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Everything in Basic
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Full signal suite
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Custom model parameters
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Multi-asset coverage
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Priority support
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                API access
+                            </li>
+                        </ul>
+                        <button class="btn btn-secondary pricing-cta" disabled>
+                            Coming Soon
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="products-benefits">
+                    <div class="benefit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <h4>Precision</h4>
+                            <p>Signals derived from rigorous mathematical models, not guesswork</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        <div>
+                            <h4>Speed</h4>
+                            <p>Real-time signal updates as market conditions change</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
+                        </svg>
+                        <div>
+                            <h4>Integration</h4>
+                            <p>Seamlessly works within your TradingView charts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="community-section">
+            <div class="container">
+                <div class="community-content">
+                    <div class="community-text">
+                        <span class="section-tag">COMMUNITY</span>
+                        <h2>Join the Global Signal Discord</h2>
+                        <p class="community-description">
+                            Connect with like-minded traders, discuss signals, share insights, and engage 
+                            directly with the Global Signal team. Our Discord is where quantitative minds meet.
+                        </p>
+                        
+                        <div class="urgency-banner">
+                            <div class="urgency-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div class="urgency-text">
+                                <strong>Limited Availability</strong>
+                                <p>Only <span class="highlight">100 free spots</span> total remaining!</p>
+                            </div>
+                        </div>
+                        
+                        <ul class="community-features">
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Direct access to the Global Signal team
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Signal discussions and analysis
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Community insights and strategies
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Early access to new features
+                            </li>
+                        </ul>
+                        
+                        <a href="https://discord.gg/fbPKtB9t7A" class="btn btn-discord" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                            </svg>
+                            Join Discord Now
+                        </a>
+                    </div>
+                    
+                    <div class="community-visual">
+                        <div class="discord-preview">
+                            <div class="discord-header">
+                                <div class="discord-icon">
+                                    <img src="/assets/images/watermark-1.png" alt="Global Signal">
+                                </div>
+                                <div class="discord-info">
+                                    <span class="discord-name">Global Signal</span>
+                                    <span class="discord-members">Traders discussing signals</span>
+                                </div>
+                            </div>
+                            <div class="discord-channels">
+                                <div class="channel-category">
+                                    <span>SIGNALS</span>
+                                </div>
+                                <div class="channel"># general-discussion</div>
+                                <div class="channel"># signal-analysis</div>
+                                <div class="channel"># market-insights</div>
+                                <div class="channel-category">
+                                    <span>SUPPORT</span>
+                                </div>
+                                <div class="channel"># help</div>
+                                <div class="channel"># feature-requests</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="/assets/images/secondary-logo-1.png" alt="Global Signal" class="footer-logo">
+                    <p class="footer-tagline">Separating Signal from Noise</p>
+                    <p class="footer-description">
+                        Mathematically rigorous financial analysis for traders, investors, and institutions.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#signals">Signals</a></li>
+                            <li><a href="#products">Products</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://discord.gg/fbPKtB9t7A" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="/privacy.html">Privacy Policy</a></li>
+                            <li><a href="/terms.html">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; <span id="currentYear">2025</span> Global Signal. All rights reserved.
+                </p>
+                <p class="disclaimer">
+                    Trading involves risk. Past performance does not guarantee future results. 
+                    Signals are for informational purposes only and do not constitute financial advice.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+</body>
+</html>
