@@ -1,240 +1,42 @@
-# Global Signal Website
+# Global Signal
 
-Separating Signal from Noise — A modern, responsive website for Global Signal's financial analysis services.
+Public marketing site for [Global Signal](https://www.globalsignal.org), a one-founder project that publishes a monthly US Economic Health Index built only from official US government statistics.
 
-## Overview
+This repository is the static site served at [www.globalsignal.org](https://www.globalsignal.org) via GitHub Pages. The index pipeline lives in a separate private repository, `Global-Signal/economic-health-index`.
 
-This website showcases Global Signal's mission to provide high-quality financial analysis using mathematically rigorous, academically sound models. The site features:
+## What the product is
 
-- **Official Brand Design**: Implements Global Signal Brand Guide v2.0 (Designer: Madison Paiement)
-- **Interactive Signal Charts**: Chart.js-powered visualizations of EMA, Volatility, Momentum, and RSI signals
-- **Responsive Layout**: Optimized for desktop and mobile devices
-- **Backend API**: Node.js/Express server with signal processing capabilities
-- **Contact Form**: Validated form with rate limiting and input sanitization
+The first product is a transparent 0–100 Economic Health Index and a plain-language monthly report. Six official series go into the index: real GDP (BEA), the unemployment rate and nonfarm payrolls (BLS), CPI-U (BLS), the effective federal funds rate (Federal Reserve H.15), and industrial production (Federal Reserve G.17). Each series is converted into a simple change, compared with its own trailing 10-year history as a z-score, and averaged with equal weights. The result is a reading and a regime label: Expansion (60 or above), Slowdown (40–59), or Contraction (below 40).
 
-## Brand Guide Implementation
+Every figure is cited back to the original government source and vintage. This is research based on public data, not a forecast of market prices, not a trading-signal product, and not investment advice.
 
-Based on **Global Signal Brand Guide v2.0** (November 14, 2025)
+The method, including data vintages, rolling z-scores, regimes, the contemporaneous NBER alignment caveat (not an accuracy rate), and known data gaps such as the unpublished October 2025 all-items CPI, is documented at [globalsignal.org/methodology](https://www.globalsignal.org/methodology).
 
-### Primary Color Palette
-| Color | Hex | RGB | Usage |
-|-------|-----|-----|-------|
-| **Neon Green** | `#CCFF00` | 204, 255, 0 | Primary accent, buttons, highlights |
-| **Dark Emerald** | `#182825` | 24, 40, 37 | Primary background |
-| **Billiard** | `#2F5951` | 47, 89, 81 | Secondary backgrounds, hover states |
-| **Champagne** | `#EAEDB0` | 234, 237, 176 | Primary text |
+## This website
 
-### Secondary Color Palette (Use Sparingly for Emphasis)
-| Color | Hex | RGB | Usage |
-|-------|-----|-----|-------|
-| **Copper** | `#FD7735` | 253, 119, 53 | Urgency, errors, accent |
-| **Gold** | `#FFE4B3` | 255, 228, 179 | Warmth, highlights |
-| **Amethyst** | `#D5CCFF` | 213, 204, 255 | Chart accents |
-| **Lavender** | `#B2A1FD` | 178, 161, 253 | Chart accents |
+The site is static HTML, CSS, and JavaScript. There is no backend on this repository, no contact form, and no payment checkout yet. The waitlist is an email link to [info@globalsignal.org](mailto:info@globalsignal.org?subject=Waitlist).
 
-### Brand Personality
-- **Confident**: Bold clarity in communication
-- **Modern**: Ahead of the curve with relevance & innovation
-- **Strategic**: Grounded in insight and long-term thinking
-- **Reliable**: Consistency and trust at every touchpoint
-- **Minimalist**: Clean, professional presentation
+| Path | Page |
+| --- | --- |
+| `/` | Landing page |
+| `/methodology` | Index methodology |
+| `/privacy.html` | Privacy policy |
+| `/terms.html` | Terms of service |
 
-## Tech Stack
+The custom domain is `www.globalsignal.org`. The `CNAME` file in this repository must stay `www.globalsignal.org`.
 
-- **Frontend**: HTML5, CSS3 (Flexbox/Grid), Vanilla JavaScript
-- **Backend**: Node.js, Express.js
-- **Database**: SQLite (via better-sqlite3) or in-memory storage
-- **Charts**: Chart.js
-- **Security**: Helmet.js, express-rate-limit, express-validator
-
-## Project Structure
-
-```
-website/
-├── server.js                 # Express server with API endpoints
-├── package.json              # Dependencies and scripts
-├── .env.example              # Environment variables template
-├── README.md                 # This file
-└── public/
-    ├── index.html            # Main SPA page
-    ├── privacy.html          # Privacy policy
-    ├── terms.html            # Terms of service
-    ├── css/
-    │   └── styles.css        # Brand-compliant styles
-    ├── js/
-    │   └── app.js            # Frontend JavaScript
-    └── assets/
-        └── images/           # Logo and brand assets
-```
-
-## Installation
-
-### Prerequisites
-
-- Node.js 18.x or higher
-- npm or yarn
-
-### Local Development
-
-1. **Clone and navigate to the project:**
-   ```bash
-   cd website
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables (optional):**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your data endpoints
-   ```
-
-4. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-
-5. **Open in browser:**
-   ```
-   http://localhost:3000
-   ```
-
-### Production
+## Local preview
 
 ```bash
-npm start
+python3 -m http.server 8080
 ```
 
-## Configuration
+Then open `http://localhost:8080/`.
 
-### Data Endpoints
+## Brand
 
-Configure your live data sources in `.env` or directly in `server.js`:
+The visual system follows Global Signal Brand Guide v2.0 (designer: Madison Paiement). Primary colors: neon green `#CCFF00`, dark emerald `#182825`, billiard `#2F5951`, and champagne `#EAEDB0`.
 
-```env
-MARKET_DATA_ENDPOINT=https://your-api.com/market-data
-ECONOMIC_INDICATORS_ENDPOINT=https://your-api.com/indicators
-ALTERNATIVE_DATA_ENDPOINT=https://your-api.com/alt-data
-SOCIAL_SENTIMENT_ENDPOINT=https://your-api.com/sentiment
-```
+## Disclaimer
 
-The server will automatically fetch data from these endpoints every hour and process them into signals.
-
-### Signal Processing
-
-The backend implements the following mathematically rigorous signals:
-
-1. **Exponential Moving Average (EMA)**
-   - Formula: `EMA_t = α × Price_t + (1 - α) × EMA_{t-1}`
-   - Alpha: `α = 2 / (period + 1)`
-
-2. **Historical Volatility**
-   - Standard deviation of log returns, annualized by √252
-   - Formula: `σ = sqrt(Σ(r_i - μ)² / (n-1)) × √252`
-
-3. **Momentum (Rate of Change)**
-   - Formula: `ROC = (Price_t - Price_{t-n}) / Price_{t-n} × 100`
-
-4. **Relative Strength Index (RSI)**
-   - Formula: `RSI = 100 - (100 / (1 + RS))`
-   - RS = Average Gain / Average Loss
-
-## API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/signals` | GET | Retrieve processed signals |
-| `/api/signals/demo` | GET | Get signal structure information |
-| `/api/contact` | POST | Submit contact form |
-| `/api/fetch-data` | POST | Manually trigger data fetch |
-| `/api/health` | GET | Health check endpoint |
-
-## Deployment
-
-### Vercel
-
-1. Install Vercel CLI:
-   ```bash
-   npm i -g vercel
-   ```
-
-2. Deploy:
-   ```bash
-   vercel
-   ```
-
-3. Set environment variables in Vercel dashboard.
-
-### Heroku
-
-1. Create Heroku app:
-   ```bash
-   heroku create global-signal
-   ```
-
-2. Deploy:
-   ```bash
-   git push heroku main
-   ```
-
-3. Set environment variables:
-   ```bash
-   heroku config:set NODE_ENV=production
-   heroku config:set MARKET_DATA_ENDPOINT=https://...
-   ```
-
-### Railway / Render
-
-1. Connect your GitHub repository
-2. Set build command: `npm install`
-3. Set start command: `npm start`
-4. Configure environment variables in dashboard
-
-### Docker
-
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
-## Security Features
-
-- **Helmet.js**: Security headers including CSP
-- **Rate Limiting**: 100 requests per 15 minutes per IP
-- **Input Validation**: express-validator for form sanitization
-- **CORS**: Configured for cross-origin requests
-- **No Tracking**: Minimal cookies, no third-party analytics
-
-## Brand Assets
-
-Logo files are sourced from the `GS Logos` folder:
-- Primary Logo: Hero section and main branding
-- Secondary Logo: Navigation and footer
-- Watermark: Favicon and app icons
-
-## Browser Support
-
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-## Contributing
-
-This is a proprietary project. Please contact info@globalsignal.org for inquiries.
-
-## License
-
-Proprietary - All rights reserved.
-
----
-
-**Global Signal** — Separating Signal from Noise
+Global Signal is not a registered investment adviser. The index and the monthly report are impersonal summaries of publicly available official statistics. They are for information only, are not financial or investment advice, and are not a recommendation to buy or sell any security or to take any particular action. Official data are revised. Past readings do not predict future economic or market outcomes. This site is not endorsed or certified by BEA, BLS, or the Federal Reserve Board.
