@@ -1,0 +1,64 @@
+name: Refresh official signals
+
+# Weekdays after typical official release times in America/Los_Angeles:
+# 00:00 UTC Tuesday–Saturday is 4:00 PM PT Monday–Friday, which is after
+# the Thursday 5:30 AM PT claims release and after usual Treasury and H.10
+# afternoon publications. No repository secret is required; the default
+# GITHUB_TOKEN commits the JSON back to this repo once this workflow is
+# on the default branch.
+on:
+  schedule:
+    - cron: "0 0 * * 2-6"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Refresh official signals
+        id: refresh
+        continue-on-error: true
+        run: python scripts/update_official_signals.py --out data/official-signals.json
+
+      - name: Commit last official board
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/official-signals.json
+          if git diff --cached --quiet; then
+            echo "No official-signal changes to commit."
+          else
+            git commit -m "Update official signals board"
+            git push
+          fi
+
+      - name: Fail if a signal has no official reading on file
+        if: steps.refresh.outcome == 'failure'
+        run: |
+          echo "The updater exited non-zero. If a source 403'd, the last good value should still be in data/official-signals.json."
+          python - << 'PY'
+          import json, sys
+          from pathlib import Path
+          path = Path("data/official-signals.json")
+          if not path.is_file():
+              sys.exit("missing official-signals.json")
+          board = json.loads(path.read_text())
+          print(json.dumps(board.get("refresh_errors") or {}, indent=2))
+          missing = [k for k, v in board.get("signals", {}).items() if not v.get("as_of")]
+          if missing:
+              raise SystemExit(f"no official reading on file for: {', '.join(missing)}")
+          PY

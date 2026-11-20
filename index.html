@@ -196,7 +196,7 @@
                 <div class="section-header">
                     <span class="section-tag">SIGNALS</span>
                     <h2 class="section-title">Latest official readings</h2>
-                    <p class="section-description">
+                    <p class="section-description" id="signals-intro">
                         Each card shows the date of its latest official observation and its source. The board is refreshed on weekdays. If a reading is out of date, it is marked or hidden; no value is invented.
                     </p>
                 </div>
@@ -216,9 +216,10 @@
                             <span class="signal-badge">Treasury</span>
                             <h4>Yield curve spreads</h4>
                         </div>
-                        <p data-signal-body>
+                        <p id="signal-curve-body" data-signal-body>
                             As of November 19, 2026, the 10-year par yield was 5.04%, the 3-month was 4.34%, and the 2-year was 4.76%. The 10-year minus 3-month spread was +0.70 percentage points, and the 10-year minus 2-year spread was +0.28 percentage points. Both of those maturity pairs were upward-sloping (a positive spread). Source: U.S. Treasury, Daily Treasury Par Yield Curve Rates.
                         </p>
+                        <p class="signal-cache-note" id="signal-curve-cache" hidden></p>
                     </div>
 
                     <div class="signal-card" data-signal="jobless_claims" data-as-of="2026-11-07" data-source-url="https://oui.doleta.gov/unemploy/csv/us_claims.csv">
@@ -226,9 +227,10 @@
                             <span class="signal-badge">DOL / ETA</span>
                             <h4>Weekly jobless claims</h4>
                         </div>
-                        <p data-signal-body>
-                            For the week ended November 7, 2026, seasonally adjusted initial claims were 202,000, and the official four-week average was 195,750. The prior week’s official seasonally adjusted reading was 191,000, so the latest week was 11,000 higher. The following week in the file was incomplete and is not shown. Source: U.S. Department of Labor, Employment and Training Administration, national weekly claims file.
+                        <p id="signal-claims-body" data-signal-body>
+                            For the week ended November 7, 2026, seasonally adjusted initial claims were 202,000, and the official four-week average was 195,750. The prior week’s official seasonally adjusted reading was 191,000, so the latest week was 11,000 higher. Incomplete later weeks in the file are not shown. Source: U.S. Department of Labor, Employment and Training Administration, national weekly claims file.
                         </p>
+                        <p class="signal-cache-note" id="signal-claims-cache" hidden></p>
                     </div>
 
                     <div class="signal-card" data-signal="broad_dollar" data-as-of="2026-11-13" data-source-url="https://www.federalreserve.gov/datadownload/Output.aspx?filetype=csv&amp;from=&amp;to=&amp;label=include&amp;lastobs=&amp;layout=seriescolumn&amp;rel=H10&amp;series=122e3bcb627e8e53f1bf72a1a09cfb81&amp;type=package">
@@ -236,9 +238,10 @@
                             <span class="signal-badge">Federal Reserve</span>
                             <h4>Broad US dollar index</h4>
                         </div>
-                        <p data-signal-body>
+                        <p id="signal-dollar-body" data-signal-body>
                             As of November 13, 2026, the nominal broad dollar index was 122.6503, with an official unit of January 1997=100. Days marked ND in the Board’s file are left as gaps. Source: Board of Governors of the Federal Reserve System, H.10 Foreign Exchange Rates, series JRXWTFB_N.B.
                         </p>
+                        <p class="signal-cache-note" id="signal-dollar-cache" hidden></p>
                     </div>
                 </div>
             </div>
@@ -466,5 +469,6 @@
     <!-- Scripts -->
     <script src="/js/official-signals.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/official-signals.js"></script>
 </body>
 </html>

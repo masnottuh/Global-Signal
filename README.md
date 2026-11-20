@@ -27,6 +27,25 @@ The site is static HTML, CSS, and JavaScript. There is no backend on this reposi
 
 The custom domain is `www.globalsignal.org`. The `CNAME` file in this repository must stay `www.globalsignal.org`.
 
+## Official signals board
+
+`data/official-signals.json` holds the latest official Treasury yield-curve, DOL/ETA claims, and Fed H.10 broad-dollar readings shown on the homepage. The homepage reads that file in the browser and keeps the last committed HTML figures as a fallback if the file cannot be loaded.
+
+A weekday GitHub Actions workflow (`.github/workflows/daily-official-signals.yml`) fetches the official sources with an honest User-Agent and rewrites the JSON. It runs at 00:00 UTC Tuesday–Saturday, which is 4:00 PM Pacific Monday–Friday, after typical Treasury and H.10 publication times and after the Thursday claims release. If a source returns an error (including HTTP 403), the last official value and its as-of date are kept; values are never invented. The workflow uses the default `GITHUB_TOKEN` and does not require a new secret. It only commits once the workflow is on `main`.
+
+Run the updater locally (optional, needs network):
+
+```bash
+python3 scripts/update_official_signals.py --out data/official-signals.json
+```
+
+Tests, which use local fixtures and do not need the network:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+
 ## Local preview
 
 ```bash

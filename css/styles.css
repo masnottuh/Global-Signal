@@ -1871,3 +1871,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.85rem;
     opacity: 0.8;
 }
+
+
+.signal-cache-note {
+    margin: 0.35rem 0 0;
+    font-size: 0.85rem;
+    opacity: 0.85;
+}

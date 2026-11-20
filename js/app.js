@@ -296,11 +296,6 @@
         });
     }
 
-    // ==================== SIGNAL CHART ====================
-
-    let chartInstance = null;
-    let currentSignalType = 'ema';
-
     function updateCurrentYear() {
         if (currentYearSpan) {
             currentYearSpan.textContent = new Date().getFullYear();
