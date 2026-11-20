@@ -1,12 +1,14 @@
 # Global Signal
 
-Public marketing site for [Global Signal](https://www.globalsignal.org), a one-founder project that publishes a monthly US Economic Health Index built only from official US government statistics.
+Public marketing site for [Global Signal](https://www.globalsignal.org), a one-founder project that publishes free official-data signals on the US economy, including a transparent US Economic Health Index, built only from official US government statistics.
 
 This repository is the static site served at [www.globalsignal.org](https://www.globalsignal.org) via GitHub Pages. The index pipeline lives in a separate private repository, `Global-Signal/economic-health-index`.
 
 ## What the product is
 
-The first product is a transparent 0–100 Economic Health Index and a plain-language monthly report. Six official series go into the index: real GDP (BEA), the unemployment rate and nonfarm payrolls (BLS), CPI-U (BLS), the effective federal funds rate (Federal Reserve H.15), and industrial production (Federal Reserve G.17). Each series is converted into a simple change, compared with its own trailing 10-year history as a z-score, and averaged with equal weights. The result is a reading and a regime label: Expansion (60 or above), Slowdown (40–59), or Contraction (below 40).
+Global Signal is a free hub of official US government data. The flagship monthly reading is a transparent 0–100 Economic Health Index. The site also reports daily and weekly official signals (Treasury yield-curve spreads, DOL/ETA jobless claims, and the Federal Reserve H.10 broad dollar index). A free public TradingView indicator is in draft and is not published yet. There is no checkout and no paid tier on this site.
+
+Six official series go into the index: real GDP (BEA), the unemployment rate and nonfarm payrolls (BLS), CPI-U (BLS), the effective federal funds rate (Federal Reserve H.15), and industrial production (Federal Reserve G.17). Each series is converted into a simple change, compared with its own trailing 10-year history as a z-score, and averaged with equal weights. The result is a reading and a regime label: Expansion (60 or above), Slowdown (40–59), or Contraction (below 40).
 
 Every figure is cited back to the original government source and vintage. This is research based on public data, not a forecast of market prices, not a trading-signal product, and not investment advice.
 
@@ -14,7 +16,7 @@ The method, including data vintages, rolling z-scores, regimes, the contemporane
 
 ## This website
 
-The site is static HTML, CSS, and JavaScript. There is no backend on this repository, no contact form, and no payment checkout yet. The waitlist is an email link to [info@globalsignal.org](mailto:info@globalsignal.org?subject=Waitlist).
+The site is static HTML, CSS, and JavaScript. There is no backend on this repository, no live email signup form, and no payment checkout. Until a provider is chosen, the updates section is a placeholder; people can write to [info@globalsignal.org](mailto:info@globalsignal.org?subject=Updates).
 
 | Path | Page |
 | --- | --- |
