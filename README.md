@@ -229,7 +229,7 @@ Logo files are sourced from the `GS Logos` folder:
 
 ## Contributing
 
-This is a proprietary project. Please contact info@globalsignal.com for inquiries.
+This is a proprietary project. Please contact info@globalsignal.org for inquiries.
 
 ## License
 
