@@ -55,7 +55,7 @@
                 <span class="dot"></span>
                 <span class="label">About</span>
             </a>
-            <a href="#signals" class="side-nav-dot" data-section="signals" aria-label="Today's official signals">
+            <a href="#signals" class="side-nav-dot" data-section="signals" aria-label="Latest official readings">
                 <span class="dot"></span>
                 <span class="label">Signals</span>
             </a>
@@ -102,12 +102,12 @@
                     </h1>
                     
                     <p class="hero-description">
-                        Global Signal is a free hub of official US government statistics. We publish a transparent US Economic Health Index, daily and weekly readings from the Treasury yield curve, jobless claims, and the Federal Reserve’s broad dollar index, and we are preparing a free TradingView indicator. Every figure is cited to the Bureau of Economic Analysis, the Bureau of Labor Statistics, the Department of the Treasury, the Department of Labor, or the Federal Reserve Board. This is not a trading-alert service, and we do not use satellite imagery, social media, or unofficial price scrapes.
+                        A free hub of official US government statistics: the monthly US Economic Health Index plus daily and weekly readings on the Treasury yield curve, jobless claims and the broad dollar index. Every figure is cited to the agency that publishes it. Not trade alerts, not a forecast.
                     </p>
                 </div>
                 
                 <div class="hero-cta">
-                    <a href="#signals" class="btn btn-primary">See today’s official signals</a>
+                    <a href="#signals" class="btn btn-primary">See the latest official readings</a>
                     <a href="/methodology" class="btn btn-secondary">Read the method</a>
                 </div>
             </div>
@@ -195,9 +195,9 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag">SIGNALS</span>
-                    <h2 class="section-title">Today’s official signals</h2>
+                    <h2 class="section-title">Latest official readings</h2>
                     <p class="section-description">
-                        Latest official observations we have published here, not forecasts and not trade alerts. The board will be updated as official releases arrive. Figures below were retrieved November 20, 2026.
+                        Each card shows the date of its latest official observation and its source. The board is refreshed on weekdays. If a reading is out of date, it is marked or hidden; no value is invented.
                     </p>
                 </div>
 
@@ -211,32 +211,32 @@
                 </div>
 
                 <div class="signals-grid">
-                    <div class="signal-card">
+                    <div class="signal-card" data-signal="treasury_yield_curve" data-as-of="2026-11-19" data-source-url="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve&amp;field_tdr_date_value=2026&amp;page&amp;_format=csv">
                         <div class="signal-header">
                             <span class="signal-badge">Treasury</span>
                             <h4>Yield curve spreads</h4>
                         </div>
-                        <p>
+                        <p data-signal-body>
                             As of November 19, 2026, the 10-year par yield was 5.04%, the 3-month was 4.34%, and the 2-year was 4.76%. The 10-year minus 3-month spread was +0.70 percentage points, and the 10-year minus 2-year spread was +0.28 percentage points. Both of those maturity pairs were upward-sloping (a positive spread). Source: U.S. Treasury, Daily Treasury Par Yield Curve Rates.
                         </p>
                     </div>
 
-                    <div class="signal-card">
+                    <div class="signal-card" data-signal="jobless_claims" data-as-of="2026-11-07" data-source-url="https://oui.doleta.gov/unemploy/csv/us_claims.csv">
                         <div class="signal-header">
                             <span class="signal-badge">DOL / ETA</span>
                             <h4>Weekly jobless claims</h4>
                         </div>
-                        <p>
+                        <p data-signal-body>
                             For the week ended November 7, 2026, seasonally adjusted initial claims were 202,000, and the official four-week average was 195,750. The prior week’s official seasonally adjusted reading was 191,000, so the latest week was 11,000 higher. The following week in the file was incomplete and is not shown. Source: U.S. Department of Labor, Employment and Training Administration, national weekly claims file.
                         </p>
                     </div>
 
-                    <div class="signal-card">
+                    <div class="signal-card" data-signal="broad_dollar" data-as-of="2026-11-13" data-source-url="https://www.federalreserve.gov/datadownload/Output.aspx?filetype=csv&amp;from=&amp;to=&amp;label=include&amp;lastobs=&amp;layout=seriescolumn&amp;rel=H10&amp;series=122e3bcb627e8e53f1bf72a1a09cfb81&amp;type=package">
                         <div class="signal-header">
                             <span class="signal-badge">Federal Reserve</span>
                             <h4>Broad US dollar index</h4>
                         </div>
-                        <p>
+                        <p data-signal-body>
                             As of November 13, 2026, the nominal broad dollar index was 122.6503, with an official unit of January 1997=100. Days marked ND in the Board’s file are left as gaps. Source: Board of Governors of the Federal Reserve System, H.10 Foreign Exchange Rates, series JRXWTFB_N.B.
                         </p>
                     </div>
@@ -251,7 +251,7 @@
                     <span class="section-tag">THE INDEX</span>
                     <h2 class="section-title">The US Economic Health Index</h2>
                     <p class="section-description">
-                        The flagship monthly reading. A value of 50 means the latest changes are in line with each series’ trailing ten-year history. It is not a claim that conditions are “normal,” and it is not a forecast. Expansion is 60 or above, slowdown is 40–59, and contraction is below 40.
+                        The flagship monthly reading. A value of 50 means the latest changes are in line with each series’ trailing ten-year history. It is not a claim that conditions are “normal,” and it is not a forecast. Expansion is 60 or above, slowdown is 40 to under 60, and contraction is below 40.
                     </p>
                 </div>
 
@@ -260,7 +260,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        As of October 2026, the index stood at 40.9, in the slowdown band, using five of six series by design. October 2026 is a month in 2026Q4, so real GDP is not in that month’s composite; the latest official GDP print is the 2026Q3 advance estimate dated October 29, 2026, and a later revision of that quarter is context only. The 12-month all-items CPI-U change is unavailable because BLS did not publish an October 2025 all-items index. A November 2026 sample report is in preparation. <a href="/methodology">Methodology</a>
+                        As of October 2026, the index stood at 40.9 (provisional), in the slowdown band, using five of six series by design. The reading will be recalculated after the Federal Reserve's annual industrial production revision on November 24, 2026, and may change. October 2026 is a month in 2026Q4, so real GDP is not in that month’s composite; the latest official GDP print is the 2026Q3 advance estimate dated October 29, 2026, and a later revision of that quarter is context only. The 12-month all-items CPI-U change is unavailable because BLS did not publish an October 2025 all-items index. A November 2026 sample report is in preparation. <a href="/methodology">Methodology</a>
                     </p>
                 </div>
 
@@ -335,7 +335,7 @@
                     <span class="section-tag">CHARTS</span>
                     <h2 class="section-title">A free TradingView indicator, coming soon</h2>
                     <p class="section-description">
-                        We are drafting a free public TradingView script, provisionally called Macro Regime, that would shade official yield-curve and jobless-claims conditions on a chart. It is not published yet, and it will not appear here as a live product until it is actually available.
+                        We are drafting a free public TradingView script, provisionally called GS Yield Curve and Jobless Claims Context, that would display official yield-curve spreads and jobless-claims context in a separate pane. It is not the Economic Health Index, it is not published yet, and it will not appear here as a live product until it is actually available.
                     </p>
                 </div>
                 <div class="about-grid">
@@ -427,7 +427,7 @@
                     <div class="footer-column">
                         <h4>Explore</h4>
                         <ul>
-                            <li><a href="#signals">Today’s official signals</a></li>
+                            <li><a href="#signals">Latest official readings</a></li>
                             <li><a href="#index">The index</a></li>
                             <li><a href="#charts">Charts</a></li>
                             <li><a href="#updates">Updates</a></li>
@@ -438,7 +438,6 @@
                         <h4>Contact</h4>
                         <ul>
                             <li><a href="mailto:info@globalsignal.org">info@globalsignal.org</a></li>
-                            <li><a href="https://discord.gg/fbPKtB9t7A" target="_blank" rel="noopener noreferrer">Discord</a></li>
                         </ul>
                     </div>
                     
@@ -465,6 +464,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="/js/official-signals.js"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>
