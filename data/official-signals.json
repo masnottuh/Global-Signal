@@ -18,7 +18,11 @@
       "shape_10y_2y": "upward-sloping",
       "source": "U.S. Treasury, Daily Treasury Par Yield Curve Rates",
       "source_url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve&field_tdr_date_value=2026&page&_format=csv",
-      "note": "Spreads are calculated from official Treasury par yields. A negative spread means that maturity pair is inverted. This is a description of official yields, not a trade signal."
+      "note": "Spreads are calculated from official Treasury par yields. A negative spread means that maturity pair is inverted. This is a description of official yields, not a trade signal.",
+      "observation_date": "2026-11-19",
+      "age_days": 0.94,
+      "freshness": "fresh",
+      "last_successful_fetch": "2026-11-20T10:27:32.270066-08:00"
     },
     "jobless_claims": {
       "id": "jobless_claims",
@@ -33,7 +37,11 @@
       "prior_week_sa_initial_claims": 191000,
       "source": "U.S. Department of Labor, Employment and Training Administration, national weekly claims file",
       "source_url": "https://oui.doleta.gov/unemploy/csv/us_claims.csv",
-      "note": "Seasonally adjusted initial claims (column c5) and the official four-week average (column c8) from the ETA national weekly file, converted from thousands. A week-over-week change is our difference between two official weekly readings. Incomplete later weeks are omitted."
+      "note": "Seasonally adjusted initial claims (column c5) and the official four-week average (column c8) from the ETA national weekly file, converted from thousands. A week-over-week change is our difference between two official weekly readings. Incomplete later weeks are omitted.",
+      "observation_date": "2026-11-07",
+      "age_days": 12.94,
+      "freshness": "fresh",
+      "last_successful_fetch": "2026-11-20T10:27:32.270066-08:00"
     },
     "broad_dollar": {
       "id": "broad_dollar",
@@ -45,7 +53,11 @@
       "unit": "Jan 1997=100",
       "source": "Board of Governors of the Federal Reserve System, H.10 Foreign Exchange Rates, series JRXWTFB_N.B",
       "source_url": "https://www.federalreserve.gov/datadownload/Output.aspx?filetype=csv&from=&to=&label=include&lastobs=&layout=seriescolumn&rel=H10&series=122e3bcb627e8e53f1bf72a1a09cfb81&type=package",
-      "note": "Official index level as published. Days marked ND in the Board's file are left as gaps and are not filled."
+      "note": "Official index level as published. Days marked ND in the Board's file are left as gaps and are not filled.",
+      "observation_date": "2026-11-13",
+      "age_days": 6.94,
+      "freshness": "fresh",
+      "last_successful_fetch": "2026-11-20T10:27:32.270066-08:00"
     }
   },
   "refresh_errors": {}

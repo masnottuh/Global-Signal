@@ -313,16 +313,12 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* Mobile Side Nav */
+/* Hide the side nav on small screens so it does not overlap the hero. */
 @media (max-width: 768px) {
     .side-nav {
-        right: var(--space-md);
-    }
-    
-    .side-nav-dot .label {
         display: none;
     }
-    
+
     .scroll-hint {
         display: none;
     }
@@ -1659,6 +1655,19 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
+}
+
+/* Footer text was 3.5:1 on the dark background; 4.5:1 is required. */
+.footer .disclaimer,
+.footer .copyright,
+.footer-description,
+.footer-links a {
+    color: var(--color-text-secondary);
+}
+
+.signal-stale,
+.signal-stale-flag {
+    color: var(--color-copper);
 }
 
 /* ==================== ANIMATIONS ==================== */

@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from update_official_signals import (  # noqa: E402
     build_board,
     format_board_unit_label,
+    freshness_for,
     parse_dol_us_claims,
     parse_fed_h10_broad_dollar,
     parse_treasury_yield_curve,
@@ -65,8 +66,15 @@ class FallbackTests(unittest.TestCase):
             fetch=False,
         )
         self.assertEqual(board["signals"]["treasury_yield_curve"]["status"], "ok")
+        self.assertEqual(board["signals"]["treasury_yield_curve"]["observation_date"], "2026-11-19")
+        self.assertEqual(board["signals"]["treasury_yield_curve"]["freshness"], "fresh")
+        # Week-ended 7 November is more than 13 days before 20 November 16:00 PT,
+        # so a successful fetch of a lagging claims file is stale, not ok.
+        self.assertEqual(board["signals"]["jobless_claims"]["status"], "stale")
+        self.assertEqual(board["signals"]["jobless_claims"]["freshness"], "warn")
         self.assertEqual(board["signals"]["jobless_claims"]["sa_initial_claims"], 202_000)
         self.assertEqual(board["signals"]["broad_dollar"]["index"], 122.6503)
+        self.assertEqual(board["signals"]["broad_dollar"]["status"], "ok")
         self.assertFalse(board["refresh_errors"])
 
     def test_keeps_last_good_values_when_a_source_fails(self):
@@ -93,6 +101,14 @@ class FallbackTests(unittest.TestCase):
         # others still refresh
         self.assertEqual(board["signals"]["treasury_yield_curve"]["status"], "ok")
         self.assertIn("no value was invented", claims["cache_note"].lower())
+        self.assertEqual(
+            claims["last_successful_fetch"],
+            previous["signals"]["jobless_claims"]["last_successful_fetch"],
+        )
+        self.assertNotEqual(
+            board["signals"]["treasury_yield_curve"]["last_successful_fetch"],
+            claims["last_successful_fetch"],
+        )
 
     def test_does_not_invent_values_without_a_cache(self):
         board = build_board(
@@ -105,6 +121,36 @@ class FallbackTests(unittest.TestCase):
             self.assertEqual(sig["status"], "unavailable")
             self.assertIsNone(sig["as_of"])
             self.assertIn("No value was invented", sig["note"])
+
+    def test_all_cached_does_not_advance_retrieved_at(self):
+        previous = build_board(
+            previous={},
+            retrieved_at=datetime(2026, 11, 20, 16, 0, 0),
+            raw=_raw(),
+            fetch=False,
+        )
+        previous_retrieved = previous["retrieved_at"]
+        board = build_board(
+            previous=previous,
+            retrieved_at=datetime(2026, 11, 21, 16, 0, 0),
+            raw={"treasury_yield_curve": None, "dol_us_claims": None, "fed_h10": None},
+            fetch=False,
+        )
+        self.assertEqual(board["retrieved_at"], previous_retrieved)
+        for key, sig in board["signals"].items():
+            self.assertEqual(sig["status"], "cached")
+            self.assertEqual(
+                sig["last_successful_fetch"],
+                previous["signals"][key]["last_successful_fetch"],
+            )
+
+    def test_freshness_thresholds(self):
+        now = datetime(2026, 11, 20, 16, 0, 0)
+        self.assertEqual(freshness_for("treasury_yield_curve", "2026-11-19", now)[0], "fresh")
+        self.assertEqual(freshness_for("treasury_yield_curve", "2026-11-14", now)[0], "warn")
+        self.assertEqual(freshness_for("treasury_yield_curve", "2026-11-01", now)[0], "hide")
+        self.assertEqual(freshness_for("jobless_claims", "2026-11-07", now)[0], "warn")
+        self.assertEqual(freshness_for("broad_dollar", "2026-11-13", now)[0], "fresh")
 
     def test_cli_writes_json(self, tmp_name="official-signals.json"):
         import tempfile

@@ -28,6 +28,13 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT = ROOT / "data" / "official-signals.json"
 PACIFIC = ZoneInfo("America/Los_Angeles")
 
+
+MAX_AGE_DAYS = {
+    "treasury_yield_curve": 5,
+    "jobless_claims": 13,
+    "broad_dollar": 12,
+}
+
 USER_AGENT = (
     "GlobalSignalResearch/0.1 (https://www.globalsignal.org; "
     "public official statistical sources only; info@globalsignal.org)"
@@ -64,6 +71,51 @@ SOURCES = {
 
 def now_pt() -> datetime:
     return datetime.now(PACIFIC)
+
+
+def _as_pt(ts: datetime) -> datetime:
+    if ts.tzinfo is None:
+        return ts.replace(tzinfo=PACIFIC)
+    return ts.astimezone(PACIFIC)
+
+
+def age_days(as_of: str, now: datetime) -> float:
+    """Days between the official observation (noon PT) and now."""
+    obs = datetime.strptime(as_of[:10], "%Y-%m-%d").replace(hour=12, minute=0, second=0, tzinfo=PACIFIC)
+    return (_as_pt(now) - obs).total_seconds() / 86400.0
+
+
+def freshness_for(key: str, as_of: str | None, now: datetime) -> tuple[str, float | None]:
+    if not as_of:
+        return "missing", None
+    age = age_days(as_of, now)
+    max_age = MAX_AGE_DAYS[key]
+    if age > 2 * max_age:
+        return "hide", age
+    if age > max_age:
+        return "warn", age
+    return "fresh", age
+
+
+def annotate_freshness(
+    signal: dict[str, Any],
+    key: str,
+    now: datetime,
+    *,
+    fetched: bool,
+) -> dict[str, Any]:
+    """Mark lagging official files as stale; do not bump fetch time on a cache hit."""
+    as_of = signal.get("as_of")
+    signal["observation_date"] = signal.get("observation_date") or as_of
+    freshness, age = freshness_for(key, as_of if isinstance(as_of, str) else None, now)
+    if age is not None:
+        signal["age_days"] = round(age, 2)
+    signal["freshness"] = freshness
+    if fetched:
+        signal["last_successful_fetch"] = _as_pt(now).isoformat()
+    if signal.get("status") == "ok" and freshness in {"warn", "hide"}:
+        signal["status"] = "stale"
+    return signal
 
 
 def treasury_url(year: int) -> str:
@@ -325,9 +377,11 @@ def merge_board(
 ) -> dict[str, Any]:
     prev_signals = previous.get("signals") if isinstance(previous.get("signals"), dict) else {}
     signals: dict[str, Any] = {}
+    any_fetched = False
     for key in ("treasury_yield_curve", "jobless_claims", "broad_dollar"):
         if fresh.get(key):
-            signals[key] = fresh[key]
+            signals[key] = annotate_freshness(fresh[key], key, retrieved_at, fetched=True)
+            any_fetched = True
         else:
             cached = _cached_copy(prev_signals.get(key), errors.get(key, "unavailable"))
             if cached is None:
@@ -335,16 +389,22 @@ def merge_board(
                     "id": key,
                     "status": "unavailable",
                     "as_of": None,
+                    "observation_date": None,
                     "refresh_error": errors.get(key, "unavailable"),
+                    "freshness": "missing",
                     "note": (
                         "No official reading is on file for this signal, and the "
                         "latest refresh did not obtain one. No value was invented."
                     ),
                 }
             else:
-                signals[key] = cached
+                signals[key] = annotate_freshness(cached, key, retrieved_at, fetched=False)
+    if any_fetched:
+        board_retrieved = _as_pt(retrieved_at).isoformat()
+    else:
+        board_retrieved = previous.get("retrieved_at") or _as_pt(retrieved_at).isoformat()
     return {
-        "retrieved_at": retrieved_at.isoformat(),
+        "retrieved_at": board_retrieved,
         "timezone": "America/Los_Angeles",
         "disclaimer": (
             "These readings are impersonal summaries of official US government "

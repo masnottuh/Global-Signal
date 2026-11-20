@@ -8,6 +8,88 @@
         "July", "August", "September", "October", "November", "December"
     ];
 
+
+    var MAX_AGE_DAYS = {
+        treasury_yield_curve: 5,
+        jobless_claims: 13,
+        broad_dollar: 12
+    };
+
+    function ageDays(iso) {
+        return (Date.now() - Date.parse(iso + "T12:00:00-08:00")) / 86400000;
+    }
+
+    function staleState(key, asOf) {
+        if (!asOf) {
+            return "missing";
+        }
+        var a = ageDays(asOf);
+        var max = MAX_AGE_DAYS[key];
+        if (max == null || isNaN(a)) {
+            return "missing";
+        }
+        if (a > 2 * max) {
+            return "hide";
+        }
+        if (a > max) {
+            return "warn";
+        }
+        return "fresh";
+    }
+
+    function applyCard(card) {
+        var key = card.getAttribute("data-signal");
+        var asOf = card.getAttribute("data-as-of");
+        var url = card.getAttribute("data-source-url") || "";
+        var state = staleState(key, asOf);
+        var body = card.querySelector("[data-signal-body]") || card.querySelector("p");
+        var flag = card.querySelector(".signal-stale-flag");
+        if (flag) {
+            flag.remove();
+        }
+        card.classList.remove("signal-stale", "signal-hidden");
+        if (state === "warn") {
+            card.classList.add("signal-stale");
+            flag = document.createElement("p");
+            flag.className = "signal-stale-flag";
+            flag.textContent =
+                "⚠ Out of date: the last official observation is from " +
+                formatDate(asOf) +
+                ", more than " +
+                MAX_AGE_DAYS[key] +
+                " days ago.";
+            var header = card.querySelector(".signal-header");
+            if (header && header.nextSibling) {
+                card.insertBefore(flag, header.nextSibling);
+            } else {
+                card.insertBefore(flag, card.firstChild);
+            }
+        } else if (state === "hide") {
+            card.classList.add("signal-stale", "signal-hidden");
+            if (body) {
+                var src = url
+                    ? " See the official source: " + url + "."
+                    : "";
+                // Keep an HTML link when a URL is present.
+                if (url) {
+                    body.innerHTML =
+                        "This reading is out of date (last official observation " +
+                        formatDate(asOf) +
+                        "). See the official source: <a href=\"" + url + "\">" + url + "</a>.";
+                } else {
+                    body.textContent =
+                        "This reading is out of date (last official observation " +
+                        formatDate(asOf) +
+                        ")." + src;
+                }
+            }
+        }
+    }
+
+    function applyAll() {
+        document.querySelectorAll("[data-signal][data-as-of]").forEach(applyCard);
+    }
+
     function formatDate(iso) {
         if (!iso || typeof iso !== "string") {
             return null;
@@ -140,38 +222,53 @@
 
     function render(board) {
         if (!board || !board.signals) {
+            applyAll();
             return;
         }
-        var intro = document.getElementById("signals-intro");
-        if (intro) {
-            var retrieved = formatRetrieved(board.retrieved_at);
-            var cached = Object.keys(board.signals).some(function (key) {
-                return board.signals[key] && board.signals[key].status === "cached";
-            });
-            var text = "Latest official observations we have published here, not forecasts and not trade alerts. " +
-                "This board is refreshed on weekdays from official sources. If a source cannot be reached, " +
-                "the last official reading and its date stay on the page; no value is invented.";
-            if (retrieved) {
-                text += " Figures below were retrieved " + retrieved + ".";
+        // Do not write a "retrieved" date into the intro. Cards show the
+        // official observation date; a cached value keeps its prior stamp.
+        var map = {
+            treasury_yield_curve: "signal-curve-body",
+            jobless_claims: "signal-claims-body",
+            broad_dollar: "signal-dollar-body"
+        };
+        var cacheMap = {
+            treasury_yield_curve: "signal-curve-cache",
+            jobless_claims: "signal-claims-cache",
+            broad_dollar: "signal-dollar-cache"
+        };
+        var writers = {
+            treasury_yield_curve: curveText,
+            jobless_claims: claimsText,
+            broad_dollar: dollarText
+        };
+        Object.keys(map).forEach(function (key) {
+            var s = board.signals[key];
+            if (!s) {
+                return;
             }
-            if (cached) {
-                text += " At least one reading below is the last official value on file, because a source could not be reached in the latest refresh.";
+            setText(map[key], writers[key](s));
+            setCacheNote(cacheMap[key], s);
+            var card = document.querySelector('[data-signal="' + key + '"]');
+            if (card) {
+                var asOf = s.observation_date || s.as_of;
+                if (asOf) {
+                    card.setAttribute("data-as-of", asOf);
+                }
+                if (s.source_url) {
+                    card.setAttribute("data-source-url", s.source_url);
+                }
             }
-            intro.textContent = text;
-        }
-        setText("signal-curve-body", curveText(board.signals.treasury_yield_curve));
-        setText("signal-claims-body", claimsText(board.signals.jobless_claims));
-        setText("signal-dollar-body", dollarText(board.signals.broad_dollar));
-        setCacheNote("signal-curve-cache", board.signals.treasury_yield_curve);
-        setCacheNote("signal-claims-cache", board.signals.jobless_claims);
-        setCacheNote("signal-dollar-cache", board.signals.broad_dollar);
+        });
+        applyAll();
     }
 
     function init() {
+        applyAll();
         if (!document.getElementById("signals")) {
             return;
         }
-        fetch(DATA_URL, { credentials: "same-origin" })
+        fetch(DATA_URL, { credentials: "same-origin", cache: "no-store" })
             .then(function (resp) {
                 if (!resp.ok) {
                     throw new Error("HTTP " + resp.status);
@@ -181,6 +278,7 @@
             .then(render)
             .catch(function () {
                 // Keep the last committed HTML figures. Do not invent replacements.
+                applyAll();
             });
     }
 
@@ -189,4 +287,13 @@
     } else {
         init();
     }
+
+    window.GSOfficialSignals = {
+        MAX_AGE_DAYS: MAX_AGE_DAYS,
+        ageDays: ageDays,
+        staleState: staleState,
+        applyAll: applyAll,
+        render: render
+    };
+
 })();
