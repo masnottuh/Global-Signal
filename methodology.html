@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology | Global Signal</title>
+    <meta name="description" content="How the Global Signal US Economic Health Index is built from official BEA, BLS, and Federal Reserve data, including vintages, regimes, data gaps, and limits.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.globalsignal.org/methodology">
+
+    <meta name="theme-color" content="#0a0f0e">
+    <link rel="icon" type="image/png" href="/assets/images/watermark-1.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px var(--container-padding) var(--space-3xl);
+        }
+
+        .legal-content h1 {
+            margin-bottom: var(--space-md);
+        }
+
+        .legal-meta {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .legal-content h2 {
+            font-size: 1.5rem;
+            margin-top: var(--space-2xl);
+            margin-bottom: var(--space-md);
+            color: var(--color-accent-primary);
+        }
+
+        .legal-content h3 {
+            font-size: 1.1rem;
+            margin-top: var(--space-xl);
+            margin-bottom: var(--space-sm);
+        }
+
+        .legal-content p, .legal-content li {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+
+        .legal-content ul, .legal-content ol {
+            padding-left: var(--space-xl);
+            margin-bottom: var(--space-md);
+        }
+
+        .legal-content li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .legal-content a {
+            color: var(--color-accent-primary);
+            text-decoration: underline;
+            text-underline-offset: 0.15em;
+        }
+
+        .legal-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-md) 0 var(--space-xl);
+            font-size: 0.92rem;
+        }
+
+        .legal-content th, .legal-content td {
+            text-align: left;
+            vertical-align: top;
+            padding: 0.6em 0.7em 0.6em 0;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+        }
+
+        .legal-content th {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: var(--color-accent-primary);
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .callout {
+            border: 1px solid var(--color-border);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar scrolled" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Global Signal Home">
+                <img src="/assets/images/primary-logo-1.png" alt="Global Signal Logo" class="logo-img">
+                <span class="logo-text">Global Signal</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="legal-content">
+        <a href="/" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+
+        <h1>US Economic Health Index methodology</h1>
+        <p class="legal-meta">Last updated: November 20, 2026</p>
+
+        <p>
+            Global Signal publishes a monthly US Economic Health Index built only from official
+            US government statistics. This page describes how the index is constructed, what it
+            is compared with historically, and where the data have gaps. It is a description of
+            a transparent arithmetic procedure, not a forecast and not investment advice.
+        </p>
+
+        <h2>Sources</h2>
+        <p>Six official series enter the index, each from the agency that produces it. FRED is not used as a source.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Official source</th>
+                    <th>Change used in the index</th>
+                    <th>Sign</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Real GDP</td>
+                    <td><a href="https://www.bea.gov/">Bureau of Economic Analysis</a> vintage history of quarterly GDP; latest published vintage for each quarter</td>
+                    <td>Official SAAR percent change from the preceding quarter, assigned to the three months of that quarter</td>
+                    <td>+</td>
+                </tr>
+                <tr>
+                    <td>Unemployment rate</td>
+                    <td><a href="https://www.bls.gov/">Bureau of Labor Statistics</a> public API, series LNS14000000, seasonally adjusted</td>
+                    <td>3-month change, percentage points</td>
+                    <td>−</td>
+                </tr>
+                <tr>
+                    <td>Nonfarm payrolls</td>
+                    <td>BLS public API, series CES0000000001, seasonally adjusted</td>
+                    <td>3-month change, thousands</td>
+                    <td>+</td>
+                </tr>
+                <tr>
+                    <td>CPI-U, all items</td>
+                    <td>BLS official all-items flat file, series CUSR0000SA0, seasonally adjusted</td>
+                    <td>3-month percent change</td>
+                    <td>−</td>
+                </tr>
+                <tr>
+                    <td>Effective federal funds rate</td>
+                    <td><a href="https://www.federalreserve.gov/">Federal Reserve Board</a> H.15, series RIFSPFF_N.M</td>
+                    <td>3-month change, percentage points</td>
+                    <td>−</td>
+                </tr>
+                <tr>
+                    <td>Industrial production</td>
+                    <td>Federal Reserve Board G.17, series IP.B50001.S, seasonally adjusted</td>
+                    <td>3-month percent change</td>
+                    <td>+</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            A registered BLS API v2 key or a free BEA API key would allow longer single-request
+            pulls in production. The prototype uses the keyless BLS v1 API, the official CPI flat
+            file, the BEA vintage-history workbook, and the Federal Reserve Board’s Data Download
+            files. This product is not endorsed or certified by BEA, BLS, or the Federal Reserve Board.
+        </p>
+
+        <h2>Vintages</h2>
+        <p>
+            Every reading is tied to an observation month and to the vintage of each input as
+            published at the time we retrieve it. Official data are revised. When a figure is
+            still an advance, preliminary, or otherwise footnoted estimate, that label is kept
+            with the reading. Real GDP is quarterly: until the following quarter is released,
+            the latest official GDP print is shown for context but is not included in the current
+            month’s composite average.
+        </p>
+        <p>
+            As of the November 2026 report, the GDP input is the 2026Q3 advance estimate from
+            BEA’s vintage-history file dated October 29, 2026. October 2026 nonfarm payrolls are
+            marked preliminary in the BLS file.
+        </p>
+
+        <h2>From changes to a 0–100 index</h2>
+        <ol>
+            <li>Compute a simple change for each series, as in the table above.</li>
+            <li>Apply a documented sign. GDP growth, payroll gains, and industrial production enter positively. Rising unemployment, faster CPI growth, and a rising federal funds rate enter negatively.</li>
+            <li>Convert each signed change to a z-score against a rolling 120-month (10-year) calendar window, requiring at least 60 available months. A high z-score means the latest change was strong relative to that window, not that the economy is strong in an absolute sense.</li>
+            <li>Take an equal-weight average of the available z-scores, requiring at least four of six components. If a series has not been published for that month, or is not available that far back, weights are renormalized over the series that are present.</li>
+            <li>Map the average through the standard normal cumulative distribution and multiply by 100. A reading of 50 means the composite change is in line with its trailing 10-year average of changes.</li>
+        </ol>
+
+        <h3>Regimes</h3>
+        <ul>
+            <li><strong>Expansion:</strong> index 60 or higher</li>
+            <li><strong>Slowdown:</strong> index from 40 up to, but not including, 60</li>
+            <li><strong>Contraction:</strong> index below 40</li>
+        </ul>
+
+        <h2>Data gaps</h2>
+        <p>
+            A 3-month or 12-month change is marked unavailable if any official observation in
+            its window is missing. Missing months are kept as gaps. They are not interpolated,
+            forward-filled, or dropped so that a change would be computed by skipping over them.
+            The same calendar window is used for rolling z-scores.
+        </p>
+        <p>
+            After the 2025 lapse in appropriations, BLS did not publish an all-items CPI-U index
+            for October 2025 (series CUSR0000SA0, footnote X) and did not publish a CPS unemployment
+            rate for October 2025 (series LNS14000000, footnote 9). BLS also does not publish net
+            or percent changes that require those observations. In particular, there is no official
+            12-month all-items CPI rate for October 2026. Nonfarm payrolls for October 2025 were
+            published. The October 2026 3-month CPI change remains defined, because July through
+            October 2026 are complete. See
+            <a href="https://www.bls.gov/bls/bls-handling-of-missing-data.htm">BLS handling of missing data</a>
+            and the
+            <a href="https://www.bls.gov/bls/2025-lapse-revised-release-dates.htm">revised release dates after the 2025 and 2026 lapses in appropriations</a>.
+        </p>
+
+        <h2>Historical alignment with NBER recessions</h2>
+        <p>
+            We compare the finished index with official NBER recession months as a contemporaneous
+            alignment check. Official monthly and quarterly data arrive with publication lags and
+            are revised. NBER recession dates are set after the fact. These figures are not a
+            forecast backtest, are not an accuracy rate, and should not be used in marketing.
+            Recession dates are from the
+            <a href="https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions">NBER business-cycle chronology</a>.
+        </p>
+
+        <h2>Not investment advice</h2>
+        <div class="callout">
+            <p>
+                The index and the monthly report are impersonal summaries of publicly available
+                official statistics and a transparent arithmetic index built from them. They are
+                for information only. They are not financial, investment, legal, or tax advice,
+                are not a recommendation to buy or sell any security or to take any particular
+                action, and are not tailored to any person’s circumstances. Official data are
+                revised. Past readings of this index, and its historical alignment with NBER dates,
+                do not predict future economic or market outcomes. Global Signal is not a
+                registered investment adviser.
+            </p>
+        </div>
+
+        <p>
+            Questions about this method: <a href="mailto:info@globalsignal.org">info@globalsignal.org</a>.
+            To be notified when the monthly report is available, join the
+            <a href="mailto:info@globalsignal.org?subject=Waitlist">waitlist by email</a>.
+        </p>
+    </main>
+</body>
+</html>
