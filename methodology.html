@@ -142,7 +142,7 @@
         </p>
 
         <h2>Sources</h2>
-        <p>Six official series enter the index, each from the agency that produces it. FRED is not used as a source.</p>
+        <p>Six official series enter the index, each from the agency that produces it.</p>
         <table>
             <thead>
                 <tr>
@@ -185,7 +185,7 @@
                 </tr>
                 <tr>
                     <td>Industrial production</td>
-                    <td>Federal Reserve Board G.17, series IP.B50001.S, seasonally adjusted</td>
+                    <td>Federal Reserve Board G.17, series IP.B50001.S, seasonally adjusted. The index unit (for example 2017=100 or 2022=100) is read from the official file, not hard-coded.</td>
                     <td>3-month percent change</td>
                     <td>+</td>
                 </tr>
@@ -203,14 +203,18 @@
             Every reading is tied to an observation month and to the vintage of each input as
             published at the time we retrieve it. Official data are revised. When a figure is
             still an advance, preliminary, or otherwise footnoted estimate, that label is kept
-            with the reading. Real GDP is quarterly: until the following quarter is released,
-            the latest official GDP print is shown for context but is not included in the current
-            month’s composite average.
+            with the reading. Real GDP is quarterly and is assigned only to the three months of a
+            published quarter. Mid-quarter months therefore use five of six series by design;
+            the latest official GDP print is shown as context and is not a missing input for
+            that month’s composite. A later revision of an already-published quarter does not
+            add the new quarter’s GDP to a mid-quarter reading.
         </p>
         <p>
-            As of the November 2026 report, the GDP input is the 2026Q3 advance estimate from
-            BEA’s vintage-history file dated October 29, 2026. October 2026 nonfarm payrolls are
-            marked preliminary in the BLS file.
+            As of the November 2026 report, October 2026 is a month in 2026Q4, so the composite
+            uses five of six series by design. The latest official GDP print is the 2026Q3
+            advance estimate from BEA’s vintage-history file dated October 29, 2026; that print,
+            and BEA’s November 25 second estimate if it revises 2026Q3, are context only.
+            October 2026 nonfarm payrolls are marked preliminary in the BLS file.
         </p>
 
         <h2>From changes to a 0–100 index</h2>
