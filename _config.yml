@@ -1,0 +1,11 @@
+# GitHub Pages runs Jekyll by default. Keep repo/dev files off the public site.
+exclude:
+  - server.js
+  - package.json
+  - package-lock.json
+  - README.md
+  - .env.example
+  - node_modules
+  - "GS Brand Guide"
+  - "GS Logos"
+  - "GS Social Media pfp"
