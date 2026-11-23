@@ -58,18 +58,11 @@ Then open `http://localhost:8080/`.
 
 ## Brand
 
-Approved colors on this site:
+The site uses the neon look of the original homepage. Neon `#CCFF00` is the logo, the headings, and the primary buttons (dark emerald text on those buttons). The page background is dark emerald `#182825`. Body text is champagne `#EAEDB0`.
 
-- Champagne `#EAEDB0` on Dark Emerald `#182825` for text and the logo.
-- Billiard `#2F5951` for cards, with champagne text.
-- Neon green `#CCFF00` only as a thin accent: the rule under the tagline, and focus rings.
+Type matches the original site: [Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4) for headings, [Inter](https://fonts.google.com/specimen/Inter) for body text, and [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) for buttons and labels.
 
-Type is [Darker Grotesque](https://fonts.google.com/specimen/Darker+Grotesque) for headings and [DM Sans](https://fonts.google.com/specimen/DM+Sans) for body text, from Google Fonts.
-
-Champagne logo files used on the page:
-
-- `assets/primary-logo-3.png` — wordmark (Primary Logo 3)
-- `assets/watermark-4.png` — tertiary mark (Watermark 4)
+The hero wordmark is `assets/primary-logo-4.png` (Primary Logo 4, neon `#CCFF00`).
 
 `assets/og-image.png` is the Open Graph and Twitter card image. Share URLs use the absolute `https://www.globalsignal.org/...` form.
 

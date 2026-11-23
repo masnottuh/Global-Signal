@@ -1,7 +1,7 @@
 /**
  * Methodology, privacy, and terms.
- * Keeps those pages on the champagne / dark emerald palette.
- * The homepage uses css/home.css instead of this file.
+ * Same neon-on-emerald palette as the homepage.
+ * The homepage uses css/home.css and does not load this file.
  */
 
 :root {
@@ -12,35 +12,28 @@
     --color-champagne: #EAEDB0;
     --color-text-primary: #EAEDB0;
     --color-text-secondary: #EAEDB0;
-    --color-text-muted: #D9DCB4;
-    --color-accent-primary: #EAEDB0;
-    --color-border: rgba(234, 237, 176, 0.28);
-    --color-bg-card: #2F5951;
-    /* Leftover rules in styles.css paint links and selection with these.
-       Map them to champagne so body text stays off neon green. */
-    --color-neon-green: #EAEDB0;
-    --color-neon-dim: #EAEDB0;
-    --color-neon-glow: transparent;
+    --color-text-muted: #C9CC9E;
+    --color-accent-primary: #CCFF00;
+    --color-neon-green: #CCFF00;
+    --color-neon-dim: #CCFF00;
+    --color-neon-glow: rgba(204, 255, 0, 0.16);
+    --color-border: rgba(204, 255, 0, 0.28);
+    --color-bg-card: rgba(10, 16, 15, 0.35);
     --container-padding: 1.25rem;
-    --radius-md: 0.5rem;
-    --font-sans: "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
-    --font-mono: "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
-    --font-serif: "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    --radius-md: 4px;
+    --font-sans: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
 }
 
 body {
     background: #182825;
     color: #EAEDB0;
-    font-family: "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
-}
-
-body::before,
-body::after {
-    display: none;
+    font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 ::selection {
-    background: #EAEDB0;
+    background: #CCFF00;
     color: #182825;
 }
 
@@ -48,18 +41,18 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: "Darker Grotesque", "Arial Narrow", "Segoe UI", sans-serif;
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
     font-weight: 600;
-    color: #EAEDB0;
+    color: #CCFF00;
 }
 
 a {
-    color: #EAEDB0;
+    color: #CCFF00;
     text-underline-offset: 0.15em;
 }
 
 a:hover {
-    color: #EAEDB0;
+    color: #CCFF00;
 }
 
 :focus-visible {
@@ -72,7 +65,7 @@ a:hover {
     top: 0;
     z-index: 2;
     background: #182825;
-    border-bottom: 1px solid rgba(234, 237, 176, 0.22);
+    border-bottom: 1px solid rgba(204, 255, 0, 0.28);
 }
 
 .nav-container {
@@ -84,10 +77,10 @@ a:hover {
 .nav-logo {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    color: #EAEDB0;
-    font-family: "Darker Grotesque", "Arial Narrow", "Segoe UI", sans-serif;
-    font-size: 1.7rem;
+    gap: 0.65rem;
+    color: #CCFF00;
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 1.55rem;
     font-weight: 600;
     line-height: 1;
     text-decoration: none;
@@ -98,17 +91,22 @@ a:hover {
     display: block;
     width: 2rem;
     height: 2rem;
+    filter: drop-shadow(0 0 10px rgba(204, 255, 0, 0.35));
 }
 
 .footer {
     background: #182825;
-    border-top: 1px solid rgba(234, 237, 176, 0.22);
+    border-top: 1px solid rgba(204, 255, 0, 0.28);
 }
 
 .footer a,
 .copyright,
 .disclaimer {
     color: #EAEDB0;
+}
+
+.footer a {
+    color: #CCFF00;
 }
 
 @media (prefers-reduced-motion: reduce) {
