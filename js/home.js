@@ -9,7 +9,6 @@
     var ID_RE = /^[A-Za-z0-9_-]{11}$/;
     var DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
     var YOUTUBE_SUBSCRIBE = 'https://www.youtube.com/@GlobalSignalOrg?sub_confirmation=1';
-    var SUBSTACK_SUBSCRIBE = 'https://globalsignalorg.substack.com/subscribe';
 
     var featured = document.getElementById('featured');
     var earlier = document.getElementById('earlier');
@@ -142,13 +141,13 @@
         heading.id = 'feature-heading';
         heading.textContent = 'First video coming soon';
 
-        var actions = el('div', 'hero-cta');
-        actions.append(
-            linkButton(SUBSTACK_SUBSCRIBE, 'Subscribe on Substack', 'btn btn-primary'),
-            linkButton(YOUTUBE_SUBSCRIBE, 'Subscribe on YouTube', 'btn btn-secondary')
-        );
+        var line = el('p');
+        var link = document.createElement('a');
+        link.href = YOUTUBE_SUBSCRIBE;
+        link.textContent = 'Watch on YouTube';
+        line.append(link);
 
-        card.append(heading, actions);
+        card.append(heading, line);
         featured.replaceChildren(card);
     }
 

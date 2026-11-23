@@ -6,7 +6,7 @@ This repository is the static site served at [www.globalsignal.org](https://www.
 
 ## Add a video
 
-The homepage reads one file, [`data/videos.json`](data/videos.json). It ships as an empty list, which shows “First video coming soon” plus subscribe buttons. To publish a video, add one object and push. No other file needs to change.
+The homepage reads one file, [`data/videos.json`](data/videos.json). It ships as an empty list, which shows “First video coming soon.” To publish a video, add one object and push. No other file needs to change.
 
 Put the newest video first. The page also sorts by `date` and features the latest one, so an older entry left at the top will not take the featured slot.
 
