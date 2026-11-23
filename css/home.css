@@ -16,6 +16,9 @@
 }
 
 .video-card {
+    width: 100%;
+    max-width: 960px;
+    margin-inline: auto;
     background: var(--color-cipher-1);
     border: 1px solid var(--color-border);
     border-radius: 12px;
@@ -33,27 +36,31 @@
 
 .video-frame {
     position: relative;
+    width: 100%;
     aspect-ratio: 16 / 9;
     background: var(--color-void);
+    overflow: hidden;
 }
 
-.facade,
-.video-frame iframe {
+.video-frame > .facade,
+.video-frame > iframe {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
     border: 0;
 }
 
 .facade {
-    padding: 0;
+    display: block;
     background: var(--color-void);
     color: var(--color-void);
     cursor: pointer;
 }
 
-.facade img,
+.video-frame img,
 .more-card img {
     width: 100%;
     height: 100%;

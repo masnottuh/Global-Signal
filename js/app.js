@@ -266,12 +266,6 @@
             
             ctx.clearRect(0, 0, signalCanvas.width, signalCanvas.height);
 
-            // Draw waves
-            waves.forEach(function(wave) {
-                drawWave(wave, time);
-            });
-
-            // Draw particles
             particles.forEach(function(particle) {
                 drawParticle(particle, time);
             });
