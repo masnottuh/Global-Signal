@@ -1,0 +1,122 @@
+/**
+ * Methodology, privacy, and terms.
+ * Keeps those pages on the champagne / dark emerald palette.
+ * The homepage uses css/home.css instead of this file.
+ */
+
+:root {
+    --color-void: #182825;
+    --color-deep: #182825;
+    --color-dark-emerald: #182825;
+    --color-billiard: #2F5951;
+    --color-champagne: #EAEDB0;
+    --color-text-primary: #EAEDB0;
+    --color-text-secondary: #EAEDB0;
+    --color-text-muted: #D9DCB4;
+    --color-accent-primary: #EAEDB0;
+    --color-border: rgba(234, 237, 176, 0.28);
+    --color-bg-card: #2F5951;
+    /* Leftover rules in styles.css paint links and selection with these.
+       Map them to champagne so body text stays off neon green. */
+    --color-neon-green: #EAEDB0;
+    --color-neon-dim: #EAEDB0;
+    --color-neon-glow: transparent;
+    --container-padding: 1.25rem;
+    --radius-md: 0.5rem;
+    --font-sans: "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-serif: "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: #182825;
+    color: #EAEDB0;
+    font-family: "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+body::before,
+body::after {
+    display: none;
+}
+
+::selection {
+    background: #EAEDB0;
+    color: #182825;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Darker Grotesque", "Arial Narrow", "Segoe UI", sans-serif;
+    font-weight: 600;
+    color: #EAEDB0;
+}
+
+a {
+    color: #EAEDB0;
+    text-underline-offset: 0.15em;
+}
+
+a:hover {
+    color: #EAEDB0;
+}
+
+:focus-visible {
+    outline: 2px solid #CCFF00;
+    outline-offset: 3px;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #182825;
+    border-bottom: 1px solid rgba(234, 237, 176, 0.22);
+}
+
+.nav-container {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0.9rem 1.25rem;
+}
+
+.nav-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #EAEDB0;
+    font-family: "Darker Grotesque", "Arial Narrow", "Segoe UI", sans-serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.nav-logo img,
+.logo-img {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+}
+
+.footer {
+    background: #182825;
+    border-top: 1px solid rgba(234, 237, 176, 0.22);
+}
+
+.footer a,
+.copyright,
+.disclaimer {
+    color: #EAEDB0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

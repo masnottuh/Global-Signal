@@ -1,27 +1,50 @@
 # Global Signal
 
-Public marketing site for [Global Signal](https://www.globalsignal.org), a one-founder project that publishes a monthly US Economic Health Index built only from official US government statistics.
+Public website for [Global Signal](https://www.globalsignal.org). The homepage is a video-first splash: the latest video, earlier videos once there is more than one, and a path to the weekly [Substack](https://globalsignalorg.substack.com) and the [YouTube channel](https://www.youtube.com/@GlobalSignalOrg).
 
-This repository is the static site served at [www.globalsignal.org](https://www.globalsignal.org) via GitHub Pages. The index pipeline lives in a separate private repository, `Global-Signal/economic-health-index`.
+This repository is the static site served at [www.globalsignal.org](https://www.globalsignal.org) via GitHub Pages. There is no application backend here.
 
-## What the product is
+## Add a video
 
-The first product is a transparent 0–100 Economic Health Index and a plain-language monthly report. Six official series go into the index: real GDP (BEA), the unemployment rate and nonfarm payrolls (BLS), CPI-U (BLS), the effective federal funds rate (Federal Reserve H.15), and industrial production (Federal Reserve G.17). Each series is converted into a simple change, compared with its own trailing 10-year history as a z-score, and averaged with equal weights. The result is a reading and a regime label: Expansion (60 or above), Slowdown (40–59), or Contraction (below 40).
+The homepage reads one file, [`data/videos.json`](data/videos.json). It ships as an empty list, which shows “First video coming soon” plus subscribe buttons. To publish a video, add one object and push. No other file needs to change.
 
-Every figure is cited back to the original government source and vintage. This is research based on public data, not a forecast of market prices, not a trading-signal product, and not investment advice.
+Put the newest video first. The page also sorts by `date` and features the latest one, so an older entry left at the top will not take the featured slot.
 
-The method, including data vintages, rolling z-scores, regimes, the contemporaneous NBER alignment caveat (not an accuracy rate), and known data gaps such as the unpublished October 2025 all-items CPI, is documented at [globalsignal.org/methodology](https://www.globalsignal.org/methodology).
+```json
+[
+  {
+    "id": "abcdefghijk",
+    "title": "What the jobs report actually said",
+    "date": "2026-11-23",
+    "description": "Optional. One or two plain sentences."
+  }
+]
+```
 
-## This website
+| Field | Required | What to put |
+| --- | --- | --- |
+| `id` | Yes | The 11-character YouTube id. In `https://www.youtube.com/watch?v=abcdefghijk` it is `abcdefghijk`. A `youtu.be` or Shorts link uses the same id. |
+| `title` | Yes | The title to show on the page. |
+| `date` | Yes | `YYYY-MM-DD`. |
+| `description` | No | A short plain-text line under the featured title. |
 
-The site is static HTML, CSS, and JavaScript. There is no backend on this repository, no contact form, and no payment checkout yet. The waitlist is an email link to [info@globalsignal.org](mailto:info@globalsignal.org?subject=Waitlist).
+The file has to be a JSON array. JSON does not allow comments or a comma after the last item.
+
+- One video: it is featured. The earlier-videos section stays hidden.
+- Two or more: the latest is featured. The others show as thumbnails (title and date). Choosing one loads it in the featured player.
+- The thumbnail comes from `i.ytimg.com`. Nothing from YouTube loads until a visitor presses play. Playback then uses `youtube-nocookie.com`.
+- The coming-soon state is in the HTML, so the subscribe links work with JavaScript off. Showing the list itself uses `js/home.js`.
+
+## Pages
 
 | Path | Page |
 | --- | --- |
-| `/` | Landing page |
-| `/methodology` | Index methodology |
+| `/` | Splash page |
+| `/methodology` | How the US Economic Health Index is built |
 | `/privacy.html` | Privacy policy |
 | `/terms.html` | Terms of service |
+
+The index method stays on the methodology page. The homepage no longer leads with it.
 
 The custom domain is `www.globalsignal.org`. The `CNAME` file in this repository must stay `www.globalsignal.org`.
 
@@ -35,8 +58,21 @@ Then open `http://localhost:8080/`.
 
 ## Brand
 
-The visual system follows Global Signal Brand Guide v2.0 (designer: Madison Paiement). Primary colors: neon green `#CCFF00`, dark emerald `#182825`, billiard `#2F5951`, and champagne `#EAEDB0`.
+Approved colors on this site:
+
+- Champagne `#EAEDB0` on Dark Emerald `#182825` for text and the logo.
+- Billiard `#2F5951` for cards, with champagne text.
+- Neon green `#CCFF00` only as a thin accent: the rule under the tagline, and focus rings.
+
+Type is [Darker Grotesque](https://fonts.google.com/specimen/Darker+Grotesque) for headings and [DM Sans](https://fonts.google.com/specimen/DM+Sans) for body text, from Google Fonts.
+
+Champagne logo files used on the page:
+
+- `assets/primary-logo-3.png` — wordmark (Primary Logo 3)
+- `assets/watermark-4.png` — tertiary mark (Watermark 4)
+
+`assets/og-image.png` is the Open Graph and Twitter card image. Share URLs use the absolute `https://www.globalsignal.org/...` form.
 
 ## Disclaimer
 
-Global Signal is not a registered investment adviser. The index and the monthly report are impersonal summaries of publicly available official statistics. They are for information only, are not financial or investment advice, and are not a recommendation to buy or sell any security or to take any particular action. Official data are revised. Past readings do not predict future economic or market outcomes. This site is not endorsed or certified by BEA, BLS, or the Federal Reserve Board.
+General commentary on public data. Not a recommendation to buy or sell any security. Global Signal is not a registered investment adviser. The longer note lives on the [terms](terms.html) and [methodology](methodology.html) pages.
