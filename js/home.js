@@ -153,10 +153,10 @@
 
     function renderFeature(video) {
         var card = el('article', 'video-card');
-        var frame = el('div', 'frame');
+        var frame = el('div', 'video-frame');
         frame.append(facade(video));
 
-        var body = el('div', 'feature-body');
+        var body = el('div', 'video-body');
         var heading = el('h2', 'section-title');
         heading.id = 'feature-heading';
         var prefix = el('span', 'visually-hidden');
@@ -167,7 +167,7 @@
 
         var pretty = formatDate(video.date);
         if (pretty) {
-            var time = el('time', 'feature-date');
+            var time = el('time', 'video-date');
             time.dateTime = video.date;
             time.textContent = pretty;
             body.append(time);
@@ -289,12 +289,11 @@
 
     function setThumb(image, id) {
         image.alt = '';
-        image.width = 480;
-        image.height = 360;
         image.decoding = 'async';
-        // hqdefault exists for every public video. maxresdefault 404s often enough
-        // to flash YouTube's placeholder.
-        image.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+        image.src = 'https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg';
+        image.addEventListener('error', function () {
+            image.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+        });
     }
 
     function linkButton(href, label, className) {
