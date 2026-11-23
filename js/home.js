@@ -137,12 +137,12 @@
     }
 
     function renderEmpty() {
-        var card = el('div', 'card empty-card');
-        var heading = el('h2', 'empty-title');
+        var card = el('div', 'video-card empty-card');
+        var heading = el('h2', 'section-title');
         heading.id = 'feature-heading';
         heading.textContent = 'First video coming soon';
 
-        var actions = el('div', 'cta-row');
+        var actions = el('div', 'hero-cta');
         actions.append(
             linkButton(SUBSTACK_SUBSCRIBE, 'Subscribe on Substack', 'btn btn-primary'),
             linkButton(YOUTUBE_SUBSCRIBE, 'Subscribe on YouTube', 'btn btn-secondary')
@@ -153,12 +153,12 @@
     }
 
     function renderFeature(video) {
-        var card = el('article', 'card feature-card');
+        var card = el('article', 'video-card');
         var frame = el('div', 'frame');
         frame.append(facade(video));
 
         var body = el('div', 'feature-body');
-        var heading = el('h2', 'feature-title');
+        var heading = el('h2', 'section-title');
         heading.id = 'feature-heading';
         var prefix = el('span', 'visually-hidden');
         prefix.textContent = 'Latest video: ';
