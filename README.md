@@ -58,7 +58,7 @@ Then open `http://localhost:8080/`.
 
 ## Brand
 
-The site uses the neon look of the original homepage. Neon `#CCFF00` is the logo, the headings, and the primary buttons (dark emerald text on those buttons). The page background is dark emerald `#182825`. Body text is champagne `#EAEDB0`.
+The site uses the neon look of the original homepage. Neon `#CCFF00` is the logo, the headings, and the primary buttons (near-black text on those buttons). The page background is the header's near-black green `#131710`. Body text is champagne `#EAEDB0`. The hero is the neon Primary Logo 4 wordmark, a faint grid, a signal wave, and the mono line “Official data, clearly explained.”
 
 Type matches the original site: [Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4) for headings, [Inter](https://fonts.google.com/specimen/Inter) for body text, and [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) for buttons and labels.
 

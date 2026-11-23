@@ -5,9 +5,9 @@
  */
 
 :root {
-    --color-void: #182825;
-    --color-deep: #182825;
-    --color-dark-emerald: #182825;
+    --color-void: #131710;
+    --color-deep: #131710;
+    --color-dark-emerald: #131710;
     --color-billiard: #2F5951;
     --color-champagne: #EAEDB0;
     --color-text-primary: #EAEDB0;
@@ -27,14 +27,14 @@
 }
 
 body {
-    background: #182825;
+    background: #131710;
     color: #EAEDB0;
     font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 ::selection {
     background: #CCFF00;
-    color: #182825;
+    color: #131710;
 }
 
 h1,
@@ -64,7 +64,7 @@ a:hover {
     position: sticky;
     top: 0;
     z-index: 2;
-    background: #182825;
+    background: #131710;
     border-bottom: 1px solid rgba(204, 255, 0, 0.28);
 }
 
@@ -95,7 +95,7 @@ a:hover {
 }
 
 .footer {
-    background: #182825;
+    background: #131710;
     border-top: 1px solid rgba(204, 255, 0, 0.28);
 }
 

@@ -1,12 +1,13 @@
 /**
  * Global Signal splash page.
- * Neon #CCFF00 logo, headings, and primary buttons on Dark Emerald #182825.
+ * Neon #CCFF00 logo, headings, and primary buttons on the near-black green
+ * sampled from the site header, #131710.
  * Body text stays champagne. Type follows the original site:
  * Source Serif 4 headings, Inter body, JetBrains Mono labels and buttons.
  */
 
 :root {
-    --emerald: #182825;
+    --emerald: #131710;
     --champagne: #EAEDB0;
     --champagne-dim: #C9CC9E;
     --neon: #CCFF00;
@@ -47,9 +48,9 @@ body::before {
     position: fixed;
     inset: 0;
     background-image:
-        linear-gradient(rgba(234, 237, 176, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(234, 237, 176, 0.045) 1px, transparent 1px);
-    background-size: 60px 60px;
+        linear-gradient(rgba(186, 196, 150, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(186, 196, 150, 0.07) 1px, transparent 1px);
+    background-size: 120px 120px;
     pointer-events: none;
     z-index: 0;
 }
@@ -125,24 +126,24 @@ a {
 
 .hero {
     position: relative;
-    padding: 3.25rem 0 1.5rem;
+    padding: 3.5rem 0 2.25rem;
+    overflow: hidden;
 }
 
-.hero::before {
-    content: "";
+.hero-wave {
     position: absolute;
-    left: 50%;
-    top: -4rem;
-    width: min(52rem, 140%);
-    height: 24rem;
-    transform: translateX(-50%);
-    background: radial-gradient(ellipse at center, rgba(204, 255, 0, 0.09), transparent 68%);
+    left: 0;
+    right: 0;
+    top: 8%;
+    width: 100%;
+    height: 78%;
     pointer-events: none;
 }
 
 .hero .wrap {
     position: relative;
-    width: min(100%, var(--hero));
+    z-index: 1;
+    width: min(100%, 76rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -150,29 +151,38 @@ a {
 }
 
 .wordmark {
-    width: auto;
-    height: clamp(3.15rem, 9vw, 5rem);
+    width: min(100%, 68rem);
+    height: auto;
+    filter:
+        drop-shadow(0 0 12px rgba(204, 255, 0, 0.55))
+        drop-shadow(0 0 36px rgba(204, 255, 0, 0.28));
+}
+
+.hero-kicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: 1.65rem 0 0;
     max-width: 100%;
-    filter: drop-shadow(0 0 22px rgba(204, 255, 0, 0.28));
+    font-family: var(--mono);
+    font-size: clamp(0.58rem, 2.5vw, 0.82rem);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #96b23c;
 }
 
-.tagline {
-    margin: 1.75rem 0 0;
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.1;
-    color: var(--neon);
-    text-wrap: balance;
-    hyphens: manual;
+.hero-kicker span:not(.hero-rule) {
+    white-space: nowrap;
 }
 
-.lede {
-    max-width: 40rem;
-    margin: 1.15rem 0 0;
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: var(--champagne);
+.hero-rule {
+    flex: 0 0 auto;
+    width: 1.1rem;
+    height: 1px;
+    background: currentColor;
 }
 
 .band {
@@ -510,7 +520,19 @@ a {
 
 @media (min-width: 40rem) {
     .hero {
-        padding-top: 4.5rem;
+        padding-top: 4.75rem;
+        padding-bottom: 2.75rem;
+    }
+
+    .hero-kicker {
+        gap: 1rem;
+        margin-top: 2rem;
+        letter-spacing: 0.34em;
+        font-size: 0.8rem;
+    }
+
+    .hero-rule {
+        width: 4.25rem;
     }
 
     .cta-row {
