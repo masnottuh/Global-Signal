@@ -1,0 +1,56 @@
+name: Sync YouTube videos
+
+on:
+  schedule:
+    # Every 30 minutes. GitHub may start a scheduled run later than the cron time.
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+# contents: write lets this job push data/videos.json to main.
+# pages: write lets it ask GitHub Pages to rebuild. A commit pushed with the
+# workflow token does not start the legacy Pages builder on its own.
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: sync-youtube-videos
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Update data/videos.json from the YouTube RSS feed
+        run: python3 scripts/sync_youtube.py
+
+      - name: Commit and push when the video list changed
+        id: commit
+        run: |
+          if git diff --quiet -- data/videos.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "data/videos.json is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/videos.json
+          git commit -m "Update videos.json from the YouTube feed"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Redeploy GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          sleep 2
+          curl --fail-with-body -sS -X POST \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds"

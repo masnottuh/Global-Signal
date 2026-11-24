@@ -1,6 +1,8 @@
 /**
  * Homepage video list.
- * Edit /data/videos.json (newest first). See the README.
+ * data/videos.json is newest first. See the README.
+ * The newest video is the featured player. The next three sit in a row
+ * under it. Choosing a card swaps that video into the player.
  * The player is a thumbnail until a visitor presses play.
  */
 (function () {
@@ -123,14 +125,16 @@
             return;
         }
 
-        var current = videos[Math.max(0, Math.min(index, videos.length - 1))];
-        renderFeature(current);
-        renderEarlier(videos, current);
+        var currentIndex = Math.max(0, Math.min(index, videos.length - 1));
+        var current = videos[currentIndex];
+        renderFeature(current, currentIndex === 0);
+        renderEarlier(videos, currentIndex);
 
         if (autoplay) {
-            var frame = featured.querySelector('.frame');
+            var frame = featured.querySelector('.video-frame');
             if (frame) {
                 mountPlayer(frame, current);
+                featured.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
     }
@@ -151,7 +155,7 @@
         featured.replaceChildren(card);
     }
 
-    function renderFeature(video) {
+    function renderFeature(video, isLatest) {
         var card = el('article', 'video-card');
         var frame = el('div', 'video-frame');
         frame.append(facade(video));
@@ -160,7 +164,7 @@
         var heading = el('h2', 'section-title');
         heading.id = 'feature-heading';
         var prefix = el('span', 'visually-hidden');
-        prefix.textContent = 'Latest video: ';
+        prefix.textContent = isLatest ? 'Latest video: ' : 'Now playing: ';
         heading.append(prefix, document.createTextNode(video.title));
 
         body.append(heading);
@@ -232,14 +236,17 @@
         });
     }
 
-    function renderEarlier(videos, current) {
-        var rest = videos.filter(function (video) {
-            return video !== current;
+    function renderEarlier(videos, currentIndex) {
+        // The player and the row share the newest four videos.
+        // The row is the other three, so the latest can be chosen again.
+        var rest = videos.slice(0, 4).filter(function (video, index) {
+            return index !== currentIndex;
         });
 
         if (rest.length === 0) {
             earlier.hidden = true;
             earlierList.replaceChildren();
+            delete earlierList.dataset.count;
             return;
         }
 
@@ -247,6 +254,7 @@
             return earlierItem(video, videos);
         });
         earlierList.replaceChildren.apply(earlierList, items);
+        earlierList.dataset.count = String(rest.length);
         earlier.hidden = false;
     }
 
@@ -288,12 +296,23 @@
     }
 
     function setThumb(image, id) {
+        var useFallback = function () {
+            if (image.dataset.fallback === 'hq') {
+                return;
+            }
+            image.dataset.fallback = 'hq';
+            image.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+        };
         image.alt = '';
         image.decoding = 'async';
-        image.src = 'https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg';
-        image.addEventListener('error', function () {
-            image.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+        image.addEventListener('error', useFallback);
+        image.addEventListener('load', function () {
+            // YouTube sometimes answers maxresdefault with a tiny placeholder.
+            if (image.naturalWidth > 0 && image.naturalWidth < 400) {
+                useFallback();
+            }
         });
+        image.src = 'https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg';
     }
 
     function linkButton(href, label, className) {

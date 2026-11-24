@@ -73,7 +73,7 @@
 
         </section>
 
-        <!-- Featured video and the earlier-videos row are filled from /data/videos.json. See the README. -->
+        <!-- Featured video and the row under it are filled from /data/videos.json. See the README. -->
         <section class="products-section splash-block" aria-labelledby="feature-heading">
             <div class="container">
                 <div id="featured">
@@ -82,15 +82,11 @@
                         <p><a href="https://www.youtube.com/@GlobalSignalOrg?sub_confirmation=1">Watch on YouTube</a></p>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="earlier" class="products-section splash-block" aria-labelledby="earlier-heading" hidden>
-            <div class="container">
-                <div class="section-header">
-                    <h2 id="earlier-heading" class="section-title">Earlier videos</h2>
+                <div id="earlier" class="earlier" hidden>
+                    <h2 id="earlier-heading" class="earlier-heading">Earlier videos</h2>
+                    <ul id="earlier-list" class="earlier-list"></ul>
                 </div>
-                <ul id="earlier-list" class="earlier-list"></ul>
             </div>
         </section>
 
